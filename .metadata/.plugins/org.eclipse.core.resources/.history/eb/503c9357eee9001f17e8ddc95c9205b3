@@ -1,0 +1,2 @@
+spring.application.name=10-Spring-Order-service
+server.port=8100
