@@ -75,6 +75,9 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\SUKUILA\Desktop\M1\MavenProjects\10-Gateway-api"/>
+			<item value="C:\Users\SUKUILA\Desktop\M1\MavenProjects\RestApiPractice"/>
+			<item value="C:\Users\SUKUILA\Desktop\M1\MavenProjects\10-Naming-Server"/>
 			<item value="C:\Users\SUKUILA\Desktop\M1\MavenProjects\10-Spring-Order-service"/>
 			<item value="C:\Users\SUKUILA\Desktop\M1\MavenProjects\10-Spring-Product-service"/>
 			<item value="C:\Users\SUKUILA\Desktop\M1\MavenProjects\9-Spring-jpa-library-app"/>

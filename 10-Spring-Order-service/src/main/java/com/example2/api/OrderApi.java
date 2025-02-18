@@ -15,33 +15,36 @@ import com.example2.proxy.ProductApiProxy;
 @RequestMapping("/orders")
 
 public class OrderApi {
+	@Autowired
+	private RestTemplate template;
 
-@PostMapping("/{id}/{q}")
+	@PostMapping("/{id}/{q}")
+	public Order orderProduct(@PathVariable int id, @PathVariable("q") int quantity) {
+//without load balancing
+//String url="http://localhost:8080/products/"+id;
 
-public Order orderProduct(@PathVariable int id, @PathVariable ("q") int quantity) {
+//RestTemplate template=new RestTemplate();
+//with load balancing with restTemplate
+		String url = "http://Product-service/products/" + id;
+		Order order = template.getForObject(url, Order.class);
 
-String url="http://localhost:8080/products/"+id;
+		order.setQuantity(quantity);
 
-RestTemplate template=new RestTemplate();
+		order.setPrice(order.getPrice() * quantity);
 
-Order order= template.getForObject(url, Order.class);
+		return order;
 
-order.setQuantity(quantity);
+	}
 
-order.setPrice(order.getPrice()*quantity);
+	@Autowired
+	private ProductApiProxy proxy;
 
-return order;
-
-}
-
-@Autowired
-private ProductApiProxy proxy;
-@PostMapping("/feign/{id}/{q}")
-public Order orderProductFeign(@PathVariable int id, @PathVariable ("q") int quantity) {
-	Order order=proxy.orderProduct(id);
-	order.setQuantity(quantity);
-	order.setPrice(order.getPrice()*quantity);
-	return order;
-}
+	@PostMapping("/feign/{id}/{q}")
+	public Order orderProductFeign(@PathVariable int id, @PathVariable("q") int quantity) {
+		Order order = proxy.orderProduct(id);
+		order.setQuantity(quantity);
+		order.setPrice(order.getPrice() * quantity);
+		return order;
+	}
 
 }
